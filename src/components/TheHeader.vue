@@ -1,6 +1,3 @@
-import TheDropdownApps from './TheDropdownApps.vue'; import TheDropdownApps from
-'./TheDropdownApps.vue';
-
 <template>
   <header class="flex fixed justify-between w-full z-30">
     <div class="flex lg:w-1/4">
