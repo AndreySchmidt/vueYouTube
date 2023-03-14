@@ -4,20 +4,23 @@
   >
     <div class="border-t border-b px-4 max-w-screen-2xl m-auto">
       <div class="py-3 flex space-x-3 overflow-auto whitespace-nowrap">
-        <a
+        <CategoryItem
           v-for="category in categories"
           :key="category"
-          href=""
-          class="text-sm px-3 py-1 inline-block rounded-full bg-gray-100 border border-gray-300 hover:bg-gray-200 transition"
-        >
-          {{ category }}
-        </a>
+          :category="category"
+          :is-active="category === 'All'"
+        />
       </div>
     </div>
   </section>
 </template>
 <script>
+import CategoryItem from "./CategoryItem.vue";
+
 export default {
+  components: {
+    CategoryItem,
+  },
   data() {
     return {
       categories: [
@@ -32,6 +35,14 @@ export default {
         "Buildings",
         "Tractors",
         "Football",
+        "quam",
+        "tempus",
+        "consectetuer",
+        "faucibus",
+        "vulputate",
+        "consequat",
+        "massa",
+        "elementum",
       ],
     };
   },
