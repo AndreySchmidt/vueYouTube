@@ -25,11 +25,11 @@
 </template>
 
 <script>
-import DropDownListItem from './DropDownListItem.vue';
+import DropDownListItem from "./DropDownListItem.vue";
 
 export default {
   components: {
     DropDownListItem,
-  }
+  },
 };
 </script>
