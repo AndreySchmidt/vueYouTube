@@ -1,6 +1,6 @@
 <template>
   <button :class="classes">
-    <BaseIcon name="user" class="mr-2 w-7 h-7" />
+    <BaseIcon name="userCircle" class="mr-2 w-7 h-7" />
     Sign In
   </button>
 </template>
