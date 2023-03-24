@@ -1,7 +1,5 @@
 <template>
-  <button
-    class="flex items-center px-2 py-1 text-sm text-blue-700 uppercase border border-blue-700 rounded-sm whitespace-nowrap focus:outline-none"
-  >
+  <button :class="classes">
     <BaseIcon name="user" class="mr-2 w-7 h-7" />
     Sign In
   </button>
@@ -13,6 +11,14 @@ import BaseIcon from "./BaseIcon.vue";
 export default {
   components: {
     BaseIcon,
+  },
+  computed: {
+    classes() {
+      return (
+        this.$attrs.class ||
+        "flex items-center px-2 py-1 text-sm text-blue-700 uppercase border border-blue-700 rounded-sm whitespace-nowrap focus:outline-none"
+      );
+    },
   },
 };
 </script>
