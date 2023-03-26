@@ -1,6 +1,6 @@
 <template>
   <!-- header start -->
-  <TheHeader />
+  <TheHeader @open-mobile-sidebar="openMobileSidebar" />
   <!-- header end -->
   <!-- sidebar md start -->
   <TheSidebarSmall />
@@ -9,7 +9,10 @@
   <TheSidebar />
   <!-- sidebar main end -->
   <!-- sidebar mobile start -->
-  <TheSidebarMobile />
+  <TheSidebarMobile
+    :is-open="isMobileSidebarOpen"
+    @close="closeMobileSidebar"
+  />
   <!-- sidebar mobile end -->
   <!-- category start -->
   <TheCategories />
@@ -38,6 +41,19 @@ export default {
     TheSidebarMobile,
     TheCategories,
     TheVideoList,
+  },
+  data() {
+    return {
+      isMobileSidebarOpen: false,
+    };
+  },
+  methods: {
+    openMobileSidebar() {
+      this.isMobileSidebarOpen = true;
+    },
+    closeMobileSidebar() {
+      this.isMobileSidebarOpen = false;
+    },
   },
 };
 </script>
