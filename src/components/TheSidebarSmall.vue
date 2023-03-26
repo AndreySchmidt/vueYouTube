@@ -1,7 +1,5 @@
 <template>
-  <aside
-    class="hidden md:block min-h-screen overflow-auto fixed top-0 pt-14 bg-white z-20"
-  >
+  <aside :class="classes">
     <section>
       <ul>
         <li>
@@ -128,3 +126,25 @@
     </section>
   </aside>
 </template>
+
+<script>
+export default {
+  props: {
+    isOpen: Boolean,
+  },
+  computed: {
+    classes() {
+      return [
+        this.isOpen ? "md:block" : "hidden",
+        "min-h-screen",
+        "overflow-auto",
+        "fixed",
+        "top-0",
+        "pt-14",
+        "bg-white",
+        "z-20",
+      ];
+    },
+  },
+};
+</script>

@@ -1,12 +1,12 @@
 <template>
   <!-- header start -->
-  <TheHeader @open-mobile-sidebar="openMobileSidebar" />
+  <TheHeader @toggle-sidebar="toggleSidebar" />
   <!-- header end -->
   <!-- sidebar md start -->
-  <TheSidebarSmall />
+  <TheSidebarSmall :is-open="sidebarState === 'compact'" />
   <!-- sidebar md end -->
   <!-- sidebar main start -->
-  <TheSidebar />
+  <TheSidebar :is-open="sidebarState === 'normal'" />
   <!-- sidebar main end -->
   <!-- sidebar mobile start -->
   <TheSidebarMobile
@@ -15,14 +15,12 @@
   />
   <!-- sidebar mobile end -->
   <!-- category start -->
-  <TheCategories />
+  <TheCategories :is-sidebar-open="sidebarState === 'normal'" />
   <!-- category end -->
 
-  <main class="xl:ml-64 md:ml-24 pt-32 px-5 pb-5">
-    <!-- video start -->
-    <TheVideoList />
-    <!-- video end -->
-  </main>
+  <!-- video start -->
+  <TheVideoList :is-sidebar-open="sidebarState === 'normal'" />
+  <!-- video end -->
 </template>
 
 <script>
@@ -45,15 +43,32 @@ export default {
   data() {
     return {
       isMobileSidebarOpen: false,
+      sidebarState: null, // normal, compact
     };
   },
   methods: {
+    toggleSidebar() {
+      if (window.innerWidth > 1280) {
+        this.sidebarState =
+          this.sidebarState === "normal" ? "compact" : "normal";
+      } else {
+        this.openMobileSidebar();
+      }
+    },
     openMobileSidebar() {
       this.isMobileSidebarOpen = true;
     },
     closeMobileSidebar() {
       this.isMobileSidebarOpen = false;
     },
+  },
+  mounted() {
+    if (window.innerWidth >= 768 && window.innerWidth < 1280) {
+      this.sidebarState = "compact";
+    }
+    if (window.innerWidth > 1280) {
+      this.sidebarState = "normal";
+    }
   },
 };
 </script>

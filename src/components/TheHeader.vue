@@ -2,7 +2,7 @@
   <header class="flex fixed justify-between w-full z-30">
     <div class="flex lg:w-1/4">
       <div class="flex items-center xl:bg-white xl:w-64 pl-4">
-        <button @click="$emit('openMobileSidebar')" class="mr-3 sm:ml-2 sm:mr-6 focus:outline-none">
+        <button @click="$emit('toggleSidebar')" class="mr-3 sm:ml-2 sm:mr-6 focus:outline-none">
           <BaseIcon name="menu" />
         </button>
         <Logo />
@@ -101,7 +101,7 @@ export default {
     BaseIcon,
   },
   emits: {
-    openMobileSidebar: null,
+    toggleSidebar: null,
   }
 
 };

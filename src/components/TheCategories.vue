@@ -1,7 +1,5 @@
 <template>
-  <section
-    class="xl:pl-64 md:pl-24 pt-14 fixed bg-white bg-opacity-90 z-10 w-full"
-  >
+  <section :class="classes">
     <div class="border-t border-b px-4 max-w-screen-2xl m-auto">
       <div class="py-3 flex space-x-3 overflow-auto whitespace-nowrap">
         <CategoryItem
@@ -45,6 +43,22 @@ export default {
         "elementum",
       ],
     };
+  },
+  props: {
+    isSidebarOpen: Boolean,
+  },
+  computed: {
+    classes() {
+      return [
+        this.isSidebarOpen ? "xl:pl-64" : "md:pl-24",
+        "pt-14",
+        "fixed",
+        "bg-white",
+        "bg-opacity-90",
+        "z-10",
+        "w-full",
+      ];
+    },
   },
 };
 </script>
