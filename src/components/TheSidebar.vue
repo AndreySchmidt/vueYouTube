@@ -11,13 +11,13 @@ export default {
   components: {
     SideBarContent,
   },
-  props: {
-    isOpen: Boolean,
-  },
+  // props: {
+  //   isOpen: Boolean,
+  // },
   computed: {
     classes() {
       return [
-        this.isOpen ? "xl:block" : "hidden",
+        // this.isOpen ? "xl:block" : "hidden",
         "w-64",
         "min-h-screen",
         "overflow-auto",
