@@ -1,9 +1,6 @@
 <template>
   <div class="relative ml-auto -mt-1">
-    <button
-      @click="isOpen = !isOpen"
-      class="ml-auto -mt-1 p-1 opacity-0 group-hover:opacity-100 text-gray-500 hover:text-gray-700 focus:outline-none"
-    >
+    <button @click="toggle" :class="buttonClasses">
       <BaseIcon name="dotsVertical" />
     </button>
     <transition
@@ -19,7 +16,7 @@
         @keydown.esc="isOpen = false"
         tabindex="-1"
         ref="dropdown"
-        class="flex flex-col absolute top-8 -right-full sm:right-0 bg-white w-48 rounded shadow focus:outline-none"
+        :class="dropDownClasses"
       >
         <section class="py-2">
           <ul>
@@ -40,9 +37,39 @@ export default {
     BaseIcon,
     VideoItemDropdownListItem,
   },
+  computed: {
+    buttonClasses() {
+      return [
+        "ml-auto",
+        "-mt-1",
+        "p-1",
+        "opacity-0",
+        "group-hover:opacity-100",
+        "text-gray-500",
+        "hover:text-gray-700",
+        "focus:outline-none",
+      ];
+    },
+    dropDownClasses() {
+      return [
+        "flex",
+        "flex-col",
+        "absolute",
+        "-right-full",
+        "sm:right-0",
+        "bg-white",
+        "w-48",
+        "rounded",
+        "shadow",
+        "focus:outline-none",
+        ...this.positionClasses,
+      ];
+    },
+  },
   data() {
     return {
       isOpen: false,
+      positionClasses: ["top-8"],
     };
   },
   watch: {
@@ -56,6 +83,52 @@ export default {
         this.isOpen = false;
       }
     });
+  },
+  methods: {
+    toggle(event) {
+      this.isOpen = !this.isOpen;
+
+      if (this.isOpen) {
+        this.$nextTick(
+          () => (this.positionClasses = this.getPositionClasses(event))
+        );
+      }
+    },
+    getPositionClasses(event) {
+      return [
+        this.getTopClass(event),
+        this.getRightClass(event),
+        this.getLeftClass(event),
+      ];
+    },
+    getTopClass(event) {
+      // вертикальная координата клика относительно всей страницы
+      const coordY = event.clientY;
+      // высота книпки открытия списка
+      const btnHeight = event.currentTarget.offsetHeight;
+      // высота выпадающего списка
+      const dropdownHeight = this.$refs.dropdown.offsetHeight;
+
+      // расстояние от клика до конца страницы
+      if (window.innerHeight - coordY < dropdownHeight) {
+        // тогда надо показать выпадайку выше кнопки открытия
+        // return "-top-" + dropdownHeight;
+        return '-top-14';
+      }
+
+      if (window.innerHeight - coordY < dropdownHeight + btnHeight) {
+        return 'top-0';
+      }
+
+      // тогда надо показать выпадайку НИЖЕ кнопки открытия
+      return "top-9";
+    },
+    getRightClass() {
+
+    },
+    getLeftClass() {
+
+    },
   },
 };
 </script>
