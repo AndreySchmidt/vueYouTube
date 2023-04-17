@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { RESOLVE_FILTER } from "@vue/compiler-core";
 import BaseIcon from "./BaseIcon.vue";
 import VideoItemDropdownListItem from "./VideoItemDropdownListItem.vue";
 
@@ -55,13 +56,15 @@ export default {
         "flex",
         "flex-col",
         "absolute",
-        "-right-full",
-        "sm:right-0",
+        // "top-8",
+        // "-right-full",
+        // "sm:right-0",
         "bg-white",
         "w-48",
         "rounded",
         "shadow",
         "focus:outline-none",
+        "z-10",
         ...this.positionClasses,
       ];
     },
@@ -69,7 +72,7 @@ export default {
   data() {
     return {
       isOpen: false,
-      positionClasses: ["top-8"],
+      positionClasses: [],
     };
   },
   watch: {
@@ -123,11 +126,51 @@ export default {
       // тогда надо показать выпадайку НИЖЕ кнопки открытия
       return "top-9";
     },
-    getRightClass() {
+    getRightClass(event) {
+      const btnHeight = event.currentTarget.offsetHeight;
 
+      const coordX = event.clientX;
+      const coordY = event.clientY;
+
+      const dropdownWidth = this.$refs.dropdown.offsetWidth;
+      const dropdownHeight = this.$refs.dropdown.offsetHeight;
+      
+      if(window.innerWidth - coordX > dropdownWidth){
+        return 'right-auto';
+      }
+
+      if(window.innerHeight - coordY > dropdownHeight + btnHeight){
+        return 'right-0';
+      }
+
+      if(window.innerHeight - coordY > dropdownHeight){
+        return 'right-8';
+      }
+
+      return 'right-0';
     },
-    getLeftClass() {
+    getLeftClass(event) {
+      const btnHeight = event.currentTarget.offsetHeight;
 
+      const coordX = event.clientX;
+      const coordY = event.clientY;
+
+      const dropdownHeight = this.$refs.dropdown.offsetHeight;
+      const dropdownWidth = this.$refs.dropdown.offsetWidth;
+      
+      if(window.innerWidth - coordX < dropdownWidth){
+        return 'left-auto';
+      }
+
+      if(window.innerHeight - coordY < dropdownHeight){
+        return 'left-auto';
+      }
+
+      if(window.innerHeight - coordY > dropdownHeight + btnHeight){
+        return 'left-auto';
+      }
+
+      return 'left-8';
     },
   },
 };
