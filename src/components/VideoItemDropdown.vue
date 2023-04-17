@@ -41,14 +41,12 @@ export default {
   computed: {
     buttonClasses() {
       return [
-        "ml-auto",
-        "-mt-1",
         "p-1",
-        "opacity-0",
-        "group-hover:opacity-100",
         "text-gray-500",
         "hover:text-gray-700",
         "focus:outline-none",
+        this.isOpen? "opacity-100" : 'opacity-0',
+        "group-hover:opacity-100",
       ];
     },
     dropDownClasses() {
@@ -64,7 +62,7 @@ export default {
         "rounded",
         "shadow",
         "focus:outline-none",
-        "z-10",
+        "z-50",
         ...this.positionClasses,
       ];
     },
@@ -77,6 +75,7 @@ export default {
   },
   watch: {
     isOpen() {
+      document.body.classList.toggle('overflow-hidden');
       this.$nextTick(() => this.isOpen && this.$refs.dropdown.focus());
     },
   },
@@ -101,6 +100,7 @@ export default {
       return [
         this.getTopClass(event),
         this.getRightClass(event),
+        this.getBottomClass(event),
         this.getLeftClass(event),
       ];
     },
@@ -116,7 +116,8 @@ export default {
       if (window.innerHeight - coordY < dropdownHeight) {
         // тогда надо показать выпадайку выше кнопки открытия
         // return "-top-" + dropdownHeight;
-        return '-top-14';
+        return '-top-auto';
+        // return '-top-14';
       }
 
       if (window.innerHeight - coordY < dropdownHeight + btnHeight) {
@@ -125,6 +126,15 @@ export default {
 
       // тогда надо показать выпадайку НИЖЕ кнопки открытия
       return "top-9";
+    },
+    getBottomClass(event) {
+      const coordY = event.clientY;
+      const dropdownHeight = this.$refs.dropdown.offsetHeight;
+
+      if (window.innerHeight - coordY < dropdownHeight) {
+        return 'bottom-8';
+      }
+      return 'bottom-auto';
     },
     getRightClass(event) {
       const btnHeight = event.currentTarget.offsetHeight;
