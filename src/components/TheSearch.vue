@@ -13,16 +13,15 @@
 </template>
 
 <script>
-import TheSearchButton from './TheSearchButton.vue';
-import TheSearchInput from './TheSearchInput.vue';
-import BaseIcon from './BaseIcon.vue';
+import TheSearchButton from "./TheSearchButton.vue";
+import TheSearchInput from "./TheSearchInput.vue";
+import BaseIcon from "./BaseIcon.vue";
 
 export default {
-    components: {
-        TheSearchButton,
-        TheSearchInput,
-        BaseIcon
-    }
+  components: {
+    TheSearchButton,
+    TheSearchInput,
+    BaseIcon,
+  },
 };
 </script>
-
