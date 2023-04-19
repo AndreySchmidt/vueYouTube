@@ -6,9 +6,11 @@
       <TheSearchInput />
       <TheSearchButton />
     </div>
-    <button class="ml-4 focus:outline-none">
-      <BaseIcon name="microphone" class="w-5 h-5" />
-    </button>
+    <BaseTooltip text="Search with your vioce">
+      <button class="p-2 focus:outline-none">
+        <BaseIcon name="microphone" class="w-5 h-5" />
+      </button>
+    </BaseTooltip>
   </div>
 </template>
 
@@ -16,12 +18,14 @@
 import TheSearchButton from "./TheSearchButton.vue";
 import TheSearchInput from "./TheSearchInput.vue";
 import BaseIcon from "./BaseIcon.vue";
+import BaseTooltip from "./BaseTooltip.vue";
 
 export default {
   components: {
     TheSearchButton,
     TheSearchInput,
     BaseIcon,
+    BaseTooltip,
   },
 };
 </script>

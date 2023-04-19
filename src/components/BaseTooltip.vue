@@ -1,7 +1,16 @@
 <template>
   <div class="relative" @mouseenter="toggle" @mouseleave="toggle">
     <slot />
-    <div v-show="isShown" :class="classes">{{ text }}</div>
+    <transition
+      enter-active-class="duration-200"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="duration-75"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <div v-show="isShown" :class="classes">{{ text }}</div>
+    </transition>
   </div>
 </template>
 
@@ -18,7 +27,7 @@ export default {
   methods: {
     toggle() {
       this.isShown = !this.isShown;
-    }
+    },
   },
   computed: {
     classes() {

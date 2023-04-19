@@ -15,12 +15,16 @@
     <div
       class="flex items-center justify-end lg:w-1/4 sm:space-x-3 p-2 sm:px-4"
     >
-      <button class="sm:hidden focus:outline-none p-2">
-        <BaseIcon name="microphone" class="w-5 h-5" />
-      </button>
-      <button class="sm:hidden focus:outline-none">
-        <BaseIcon name="search" class="w-5 h-5" />
-      </button>
+      <BaseTooltip text="Search with your vioce">
+        <button class="sm:hidden focus:outline-none p-2">
+          <BaseIcon name="microphone" class="w-5 h-5" />
+        </button>
+      </BaseTooltip>
+      <BaseTooltip text="Search">
+        <button class="sm:hidden focus:outline-none">
+          <BaseIcon name="search" class="w-5 h-5" />
+        </button>
+      </BaseTooltip>
       <TheDropdownApps />
 
       <TheDropdownSettings />
@@ -38,6 +42,7 @@ import TheSearch from "./TheSearch.vue";
 import Logo from "./Logo.vue";
 import ButtonSignIn from "./ButtonSignIn.vue";
 import BaseIcon from "./BaseIcon.vue";
+import BaseTooltip from "./BaseTooltip.vue";
 
 export default {
   components: {
@@ -47,6 +52,7 @@ export default {
     Logo,
     ButtonSignIn,
     BaseIcon,
+    BaseTooltip,
   },
   emits: {
     toggleSidebar: null,
