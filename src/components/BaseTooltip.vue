@@ -18,6 +18,7 @@
 export default {
   props: {
     text: String,
+    top: Boolean,
   },
   data() {
     return {
@@ -40,10 +41,10 @@ export default {
         "whitespace-nowrap",
         "p-2",
         "absolute",
-        "top-14",
         "left-1/2",
         "transform",
         "-translate-x-1/2",
+        this.top ? "bottom-6" : "top-14",
       ];
     },
   },
